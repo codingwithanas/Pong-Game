@@ -28,13 +28,13 @@ def main():
         if pilota.posY <= MARGEN_ESCENARIO or pilota.posY >= ALTO_ESCENARIO - MARGEN_ESCENARIO:
             pilota.velY = -pilota.velY
         
-        if pilota.posX <= jugador1.posX + JUGADOR_ANCHO and pilota.posY >= jugador1.posY and pilota.posY <= jugador1.posY + JUGADOR_ALTO:
+        elif pilota.posX <= jugador1.posX + JUGADOR_ANCHO and pilota.posY >= jugador1.posY and pilota.posY <= jugador1.posY + JUGADOR_ALTO:
             pilota.velX = -pilota.velX
             
-        if pilota.posX >= jugador2.posX - JUGADOR_ANCHO // 2 and pilota.posY >= jugador2.posY and pilota.posY <= jugador2.posY + JUGADOR_ALTO:
+        elif pilota.posX >= jugador2.posX - JUGADOR_ANCHO // 2 and pilota.posY >= jugador2.posY and pilota.posY <= jugador2.posY + JUGADOR_ALTO:
             pilota.velX = -pilota.velX
         
-        if pilota.posX <= 0 or pilota.posX >= ANCHO_ESCENARIO:
+        elif pilota.posX <= jugador1.posX or pilota.posX >= jugador2.posX:
             pilota.reinicia()
 
         finestraJoc.fill(COLOR_FONDO)
