@@ -13,36 +13,40 @@ def main():
 
     jugador1 = Jugador(MARGEN_ESCENARIO, ALTO_ESCENARIO // 2 - JUGADOR_ALTO // 2, COLOR_JUGADOR1, VELOCIDAD_JUGADOR)
     jugador2 = Jugador(ANCHO_ESCENARIO - MARGEN_ESCENARIO - JUGADOR_ANCHO, ALTO_ESCENARIO // 2 - JUGADOR_ALTO // 2, COLOR_JUGADOR2, VELOCIDAD_JUGADOR)
-    pilota = Pilota()  #
+    pilota = Pilota()
 
     while not gameOver:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        jugador1.mover(pygame.K_w, pygame.K_s)
-        jugador2.mover(pygame.K_UP, pygame.K_DOWN)
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w]:
+            jugador1.MoureAmunt()
+        if keys[pygame.K_s]:
+            jugador1.MoureAvall()
+        if keys[pygame.K_UP]:
+            jugador2.MoureAmunt()
+        if keys[pygame.K_DOWN]:
+            jugador2.MoureAvall()
 
-        pilota.actualitza()
+        pilota.MourePilota()
 
-        if pilota.posY <= MARGEN_ESCENARIO or pilota.posY >= ALTO_ESCENARIO - MARGEN_ESCENARIO:
-            pilota.velY = -pilota.velY
-        
-        elif pilota.posX <= jugador1.posX + JUGADOR_ANCHO and pilota.posY >= jugador1.posY and pilota.posY <= jugador1.posY + JUGADOR_ALTO:
+        if pilota.posX <= jugador1.posX + jugador1.ancho and pilota.posY >= jugador1.posY and pilota.posY <= jugador1.posY + jugador1.alto:
             pilota.velX = -pilota.velX
-            
-        elif pilota.posX >= jugador2.posX - JUGADOR_ANCHO // 2 and pilota.posY >= jugador2.posY and pilota.posY <= jugador2.posY + JUGADOR_ALTO:
+        
+        if pilota.posX >= jugador2.posX - jugador2.ancho and pilota.posY >= jugador2.posY and pilota.posY <= jugador2.posY + jugador2.alto:
             pilota.velX = -pilota.velX
         
         elif pilota.posX <= jugador1.posX or pilota.posX >= jugador2.posX:
-            pilota.reinicia()
+            pilota.ReiniciaPilota()
 
         finestraJoc.fill(COLOR_FONDO)
         pygame.draw.rect(finestraJoc, VERD, (0, MARGEN_ESCENARIO, ANCHO_ESCENARIO - 2 * 0, ALTO_ESCENARIO - 2 * MARGEN_ESCENARIO))
 
-        jugador1.dibuja_jugador(finestraJoc)
-        jugador2.dibuja_jugador(finestraJoc)
-        pilota.dibuixa_pilota(finestraJoc)
+        jugador1.Pinta(finestraJoc)
+        jugador2.Pinta(finestraJoc)
+        pilota.Pinta(finestraJoc)
 
         pygame.display.update()
         rellotge.tick(30)

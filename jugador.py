@@ -1,21 +1,28 @@
 import pygame
-from constants import JUGADOR_ANCHO, JUGADOR_ALTO, ALTO_ESCENARIO, MARGEN_ESCENARIO
+from constants import JUGADOR_ALTO, JUGADOR_ANCHO, MARGEN_ESCENARIO, ALTO_ESCENARIO
 
-class Jugador:
-    def __init__(self, posX, posY, color, velocidad):
+class ObjecteEscenari:
+    def __init__(self, posX, posY, color):
         self.posX = posX
         self.posY = posY
         self.color = color
+
+    def Pinta(self, pantalla):
+        pass
+class Jugador(ObjecteEscenari):
+    def __init__(self, posX, posY, color, velocidad):
+        super().__init__(posX, posY, color)
         self.ancho = JUGADOR_ANCHO
         self.alto = JUGADOR_ALTO
-        self.velocidad = velocidad  
+        self.velocidad = velocidad
 
-    def dibuja_jugador(self, pantalla):
+    def Pinta(self, pantalla):
         pygame.draw.rect(pantalla, self.color, (self.posX, self.posY, self.ancho, self.alto))
 
-    def mover(self, arriba, abajo):
-        teclas = pygame.key.get_pressed()
-        if teclas[arriba] and self.posY - self.velocidad >= MARGEN_ESCENARIO:
+    def MoureAmunt(self):
+        if self.posY - self.velocidad >= MARGEN_ESCENARIO:
             self.posY -= self.velocidad
-        if teclas[abajo] and self.posY + self.alto + self.velocidad <= ALTO_ESCENARIO - MARGEN_ESCENARIO:
+
+    def MoureAvall(self):
+        if self.posY + self.alto + self.velocidad <= ALTO_ESCENARIO - MARGEN_ESCENARIO:
             self.posY += self.velocidad
