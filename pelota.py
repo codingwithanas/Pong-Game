@@ -29,8 +29,6 @@ class Pilota(ObjecteEscenari):
 
         if self.posY <= MARGEN_ESCENARIO or self.posY >= ALTO_ESCENARIO - MARGEN_ESCENARIO - self.MIDA:
             self.velY = -self.velY
-            
-    
 
     def ReiniciaPilota(self):
         self.posX = ANCHO_ESCENARIO // 2 - self.MIDA // 2

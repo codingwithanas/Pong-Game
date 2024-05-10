@@ -9,12 +9,16 @@ class ObjecteEscenari:
 
     def Pinta(self, pantalla):
         pass
-class Jugador(ObjecteEscenari):
+    
+class Jugador:
     def __init__(self, posX, posY, color, velocidad):
-        super().__init__(posX, posY, color)
+        self.posX = posX
+        self.posY = posY
+        self.color = color
         self.ancho = JUGADOR_ANCHO
         self.alto = JUGADOR_ALTO
         self.velocidad = velocidad
+        self.punts = 0 
 
     def Pinta(self, pantalla):
         pygame.draw.rect(pantalla, self.color, (self.posX, self.posY, self.ancho, self.alto))
